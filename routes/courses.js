@@ -18,7 +18,7 @@ router.get("/:id", async (req, res) => {
     const course = await NewCourse.findById(req.params.id);
     const document = await Document.find({ courseId: course.courseId });
     console.log(course, document);
-    const completeCourseDetails = JSON.stringify(course).concat(JSON.stringify(document));
+    const completeCourseDetails = { ...course._doc, document: { ...document } };
     res.json(completeCourseDetails);
   } catch (err) {
     res.send("Error " + err);
