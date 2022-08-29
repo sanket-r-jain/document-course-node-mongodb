@@ -13,6 +13,9 @@ app.use(express.json());
 const courseRouter = require("./routes/courses");
 app.use("/courses", courseRouter);
 
+const documentRouter = require("./routes/documents");
+app.use("/documents", documentRouter);
+
 app.listen(5000, () => {
   console.log("Server started");
 });
