@@ -18,7 +18,7 @@ router.get("/:id", async (req, res) => {
     const course = await NewCourse.findById(req.params.id);
     const document = await Document.find({ courseId: course.courseId });
     console.log(course, document);
-    const completeCourseDetails = { ...course._doc, document: { ...document } };
+    const completeCourseDetails = { ...course._doc, documents: { ...document } };
     res.json(completeCourseDetails);
   } catch (err) {
     res.send("Error " + err);
@@ -33,10 +33,10 @@ router.post("/", async (req, res) => {
   });
 
   try {
-    const newCouse = await course.save();
-    res.json(newCouse);
+    const newCourse = await course.save();
+    res.json(newCourse);
   } catch (err) {
-    res.send("Error:", err);
+    res.send("Error " + err);
   }
 });
 
@@ -51,7 +51,7 @@ router.put("/:id", async (req, res) => {
     const updatedCourse = await courseToBeUpdated.save();
     res.json(updatedCourse);
   } catch (err) {
-    res.send("Error:", err);
+    res.send("Error " + err);
   }
 });
 
@@ -60,7 +60,7 @@ router.delete("/:id", async (req, res) => {
     await NewCourse.deleteOne({ _id: req.params.id });
     res.json({ message: "deleted successfully" });
   } catch (err) {
-    res.send("Error:", err);
+    res.send("Error " + err);
   }
 });
 
